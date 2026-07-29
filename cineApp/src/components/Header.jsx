@@ -1,15 +1,23 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "../assets/images/logo.jpg";
 import { useState } from "react";
 
 import { ThemeToggleBtn } from "./ThemeToggleBtn";
 
 export const Header = () => {
+  const navigate = useNavigate();
+
   const activeLink =
     "block py-2 px-3 text-sky-600 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0";
   const inActiveLink =
     "block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent";
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const query = event.target.search.value;
+    event.target.reset;
+    navigate(`/search?q=${query}`);
+  };
   const [onMobile, setOnMobile] = useState(true);
   return (
     <header>
@@ -70,12 +78,15 @@ export const Header = () => {
                   />
                 </svg>
               </div>
-              <input
-                type="text"
-                id="input-group-1"
-                className="block w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-2.5 shadow-xs placeholder:text-body"
-                placeholder="Search"
-              />
+              <form onSubmit={handleSubmit}>
+                <input
+                  name="search"
+                  type="text"
+                  id="input-group-1"
+                  className="block text-gray-800 w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-2.5 shadow-xs placeholder:text-body"
+                  placeholder="Search"
+                />
+              </form>
             </div>
             <button
               onClick={() => setOnMobile(!onMobile)}
@@ -123,12 +134,15 @@ export const Header = () => {
                   />
                 </svg>
               </div>
-              <input
-                type="text"
-                id="input-group-1"
-                className="block w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand px-2.5 shadow-xs placeholder:text-body"
-                placeholder="Search"
-              />
+              <form onSubmit={handleSubmit}>
+                <input
+                  name="search"
+                  type="text"
+                  id="input-group-1"
+                  className="block w-full ps-9 text-gray-800 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand px-2.5 shadow-xs placeholder:text-body"
+                  placeholder="Search"
+                />
+              </form>
             </div>
             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
               <li>
