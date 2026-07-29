@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
-export const useFetch = (apiPath) => {
-  const api_key = "423159923775f95f270f072f1bb06798";
+export const useFetch = (apiPath, queryTerms) => {
+  const api_key = import.meta.env.VITE_API_KEY;
   const base_url = "https://api.themoviedb.org/3/";
 
-  const url = `${base_url}${apiPath}?api_key=${api_key}&page=3`;
+  const url = `${base_url}${apiPath}?api_key=${api_key}&page=3&query=${queryTerms}`;
   console.log(apiPath);
   console.log(url);
 
